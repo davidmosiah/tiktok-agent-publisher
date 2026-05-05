@@ -1,5 +1,8 @@
 # TikTok Agent Publisher
 
+[![npm version](https://img.shields.io/npm/v/tiktok-agent-publisher.svg)](https://www.npmjs.com/package/tiktok-agent-publisher)
+[![CI](https://github.com/davidmosiah/tiktok-agent-publisher/actions/workflows/ci.yml/badge.svg)](https://github.com/davidmosiah/tiktok-agent-publisher/actions/workflows/ci.yml)
+
 Local-first TikTok Content Posting API tooling for AI agents. It gives Codex, Claude, Cursor, Hermes, OpenClaw and other MCP clients a safe way to check readiness, build OAuth URLs, dry-run publish flows and upload TikTok videos only when live mode is explicitly enabled.
 
 ## Why It Exists
