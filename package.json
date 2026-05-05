@@ -1,6 +1,6 @@
 {
   "name": "tiktok-agent-publisher",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Local-first TikTok Content Posting API CLI and MCP helper for AI agents.",
   "type": "module",
   "bin": {
