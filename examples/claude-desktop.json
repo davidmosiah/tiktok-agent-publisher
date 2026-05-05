@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tiktok": {
+      "command": "npx",
+      "args": ["-y", "tiktok-agent-publisher"]
+    }
+  }
+}

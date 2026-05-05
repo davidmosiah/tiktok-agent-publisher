@@ -1,9 +1,13 @@
 # TikTok Agent Publisher
 
 [![npm version](https://img.shields.io/npm/v/tiktok-agent-publisher.svg)](https://www.npmjs.com/package/tiktok-agent-publisher)
+[![npm downloads](https://img.shields.io/npm/dm/tiktok-agent-publisher.svg)](https://www.npmjs.com/package/tiktok-agent-publisher)
 [![CI](https://github.com/davidmosiah/tiktok-agent-publisher/actions/workflows/ci.yml/badge.svg)](https://github.com/davidmosiah/tiktok-agent-publisher/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Local-first TikTok Content Posting API tooling for AI agents. It gives Codex, Claude, Cursor, Hermes, OpenClaw and other MCP clients a safe way to check readiness, build OAuth URLs, dry-run publish flows and upload TikTok videos only when live mode is explicitly enabled.
+
+Use it when an agent needs to publish or inspect TikTok content without browser automation, hidden state or token leakage.
 
 ## Why It Exists
 
@@ -26,7 +30,7 @@ npm install -g tiktok-agent-publisher
 Or run without installing:
 
 ```bash
-npx -y tiktok-agent-publisher doctor
+npm exec --yes --package=tiktok-agent-publisher -- tiktok-agent-publisher doctor
 ```
 
 ## CLI
@@ -73,6 +77,24 @@ Recommended first calls:
 1. `tiktok_connection_status`
 2. `tiktok_privacy_audit`
 3. `tiktok_publish_video`
+
+## Agent Surfaces
+
+| Tool | Purpose |
+|---|---|
+| `tiktok_agent_manifest` | Install/runtime guidance for Codex, Claude, Cursor, Hermes and OpenClaw |
+| `tiktok_connection_status` | Dry-run, OAuth and media-hosting readiness without token values |
+| `tiktok_privacy_audit` | Local file, token and live-publish boundaries |
+| `tiktok_publish_video` | Dry-run or live video publish flow |
+| `tiktok_publish_status` | Publish-status polling |
+| `tiktok_list_videos` | Recent video list for post-publish checks |
+
+## Copy-Paste Agent Prompt
+
+```text
+Use tiktok-agent-publisher. First call tiktok_connection_status and tiktok_privacy_audit.
+If dry-run is enabled, build the publish payload only. Do not request or print token values.
+```
 
 ## Configuration
 

@@ -1,7 +1,7 @@
 {
   "name": "tiktok-agent-publisher",
-  "version": "0.1.1",
-  "description": "Local-first TikTok Content Posting API CLI and MCP helper for AI agents.",
+  "version": "0.1.2",
+  "description": "Agent-first TikTok Content Posting API CLI and MCP server with dry-run publishing, OAuth readiness and privacy audit tools.",
   "type": "module",
   "bin": {
     "tiktok-agent-publisher": "src/cli.js",
@@ -19,9 +19,14 @@
     "ai-agents",
     "mcp",
     "model-context-protocol",
+    "mcp-server",
+    "agent-tools",
+    "agentic-workflows",
     "tiktok",
     "content-posting-api",
     "social-media-automation",
+    "creator-tools",
+    "local-first",
     "cli"
   ],
   "author": "David Mosiah",
@@ -42,6 +47,8 @@
   },
   "files": [
     "src",
+    "examples",
+    "llms.txt",
     "README.md",
     "LICENSE",
     ".env.example"

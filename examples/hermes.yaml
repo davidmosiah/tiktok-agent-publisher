@@ -1,0 +1,6 @@
+mcp_servers:
+  tiktok:
+    command: npx
+    args: ["-y", "tiktok-agent-publisher"]
+    sampling:
+      enabled: false

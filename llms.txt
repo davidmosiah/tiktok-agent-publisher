@@ -1,0 +1,21 @@
+# TikTok Agent Publisher
+
+Agent-first TikTok Content Posting API CLI and MCP server.
+
+Repository: https://github.com/davidmosiah/tiktok-agent-publisher
+NPM: https://www.npmjs.com/package/tiktok-agent-publisher
+Primary command: npm exec --yes --package=tiktok-agent-publisher -- tiktok-agent-publisher doctor
+MCP command: tiktok-agent-mcp
+
+Core tools:
+- tiktok_agent_manifest
+- tiktok_connection_status
+- tiktok_privacy_audit
+- tiktok_publish_video
+- tiktok_publish_status
+- tiktok_list_videos
+
+Safety:
+- Dry-run is enabled by default.
+- Tokens are never returned to agents.
+- Live publishing requires TIKTOK_DRY_RUN=false.
