@@ -1,0 +1,45 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.davidmosiah/tiktok-agent-publisher",
+  "version": "0.1.2",
+  "title": "TikTok Agent Publisher",
+  "description": "Local-first TikTok Content Posting API tooling for AI agents. Supports OAuth readiness checks, dry-run publishing flows and explicit live uploads.",
+  "websiteUrl": "https://github.com/davidmosiah/tiktok-agent-publisher",
+  "repository": {
+    "url": "https://github.com/davidmosiah/tiktok-agent-publisher",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "tiktok-agent-publisher",
+      "version": "0.1.2",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "TIKTOK_DRY_RUN",
+          "description": "Set to false only when the agent should perform live TikTok upload operations. Defaults to dry-run behavior.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        },
+        {
+          "name": "TIKTOK_CLIENT_KEY",
+          "description": "TikTok developer app client key. Optional until OAuth or live upload flows are used.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        },
+        {
+          "name": "TIKTOK_CLIENT_SECRET",
+          "description": "TikTok developer app client secret. Keep local and do not expose it to agents.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
