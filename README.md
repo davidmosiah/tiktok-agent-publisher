@@ -1,13 +1,34 @@
-# TikTok Agent Publisher
+<!-- delx header v2 -->
+<h1 align="center">TikTok Agent Publisher</h1>
 
-[![npm version](https://img.shields.io/npm/v/tiktok-agent-publisher.svg)](https://www.npmjs.com/package/tiktok-agent-publisher)
-[![npm downloads](https://img.shields.io/npm/dm/tiktok-agent-publisher.svg)](https://www.npmjs.com/package/tiktok-agent-publisher)
-[![GitHub stars](https://img.shields.io/github/stars/davidmosiah/tiktok-agent-publisher?style=flat-square&logo=github)](https://github.com/davidmosiah/tiktok-agent-publisher/stargazers)
-[![CI](https://github.com/davidmosiah/tiktok-agent-publisher/actions/workflows/ci.yml/badge.svg)](https://github.com/davidmosiah/tiktok-agent-publisher/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Agent-first](https://img.shields.io/badge/agent--first-MCP-0ea5a3?style=flat-square)](https://github.com/davidmosiah/tiktok-agent-publisher)
+<div align="center">
+  <img src="assets/banner.png" alt="TikTok Agent Publisher" width="85%" />
+</div>
 
-> If this agent-first tool helps your workflow, please star the repo. Stars make this agent-first tooling easier for other builders to discover and help Delx keep shipping open infrastructure.
+<h3 align="center">
+  Agent-first TikTok Content Posting API CLI + MCP.<br>Dry-run safe, OAuth readiness checks, structured output for any agent runtime.
+</h3>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/tiktok-agent-publisher"><img src="https://img.shields.io/npm/v/tiktok-agent-publisher?style=for-the-badge&labelColor=0F172A&color=10B981&logo=npm&logoColor=white" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/tiktok-agent-publisher"><img src="https://img.shields.io/npm/dm/tiktok-agent-publisher?style=for-the-badge&labelColor=0F172A&color=0EA5A3&logo=npm&logoColor=white" alt="npm downloads" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-22C55E?style=for-the-badge&labelColor=0F172A" alt="License MIT" /></a>
+  <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/BUILT_FOR-MCP-7C3AED?style=for-the-badge&labelColor=0F172A" alt="Built for MCP" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/davidmosiah/tiktok-agent-publisher/stargazers"><img src="https://img.shields.io/github/stars/davidmosiah/tiktok-agent-publisher?style=for-the-badge&labelColor=0F172A&color=FBBF24&logo=github" alt="GitHub stars" /></a>
+  <a href="https://github.com/davidmosiah/tiktok-agent-publisher/actions/workflows/ci.yml"><img src="https://github.com/davidmosiah/tiktok-agent-publisher/actions/workflows/ci.yml/badge.svg" alt="CI status" /></a>
+  <a href="https://github.com/davidmosiah"><img src="https://img.shields.io/badge/PART_OF-Delx_Agent_Stack-0EA5A3?style=for-the-badge&labelColor=0F172A" alt="Part of the Delx agent stack" /></a>
+  <a href="https://github.com/davidmosiah/tiktok-agent-publisher"><img src="https://img.shields.io/badge/CATEGORY-Reach-FE2C55?style=for-the-badge&labelColor=0F172A" alt="Category" /></a>
+</p>
+
+> ⭐ **If this agent-first tool helps your workflow, please star the repo.** Stars make this tooling easier for other builders to discover and help Delx keep shipping open infrastructure.<br>
+> 🧱 Part of the [Delx agent stack](https://github.com/davidmosiah) &mdash; 15 open-source MCP servers across **body, reach and coordination**.
+
+---
+
+<!-- /delx header v2 -->
 
 Local-first TikTok Content Posting API tooling for AI agents. It gives Codex, Claude, Cursor, Hermes, OpenClaw and other MCP clients a safe way to check readiness, build OAuth URLs, dry-run publish flows and upload TikTok videos only when live mode is explicitly enabled.
 
