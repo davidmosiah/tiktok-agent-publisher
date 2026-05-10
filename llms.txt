@@ -1,21 +1,38 @@
 # TikTok Agent Publisher
 
-Agent-first TikTok Content Posting API CLI and MCP server.
+Agent-first TikTok Content Posting API CLI and MCP server. Dry-run safe by default, OAuth-authenticated, never returns tokens to the agent.
 
 Repository: https://github.com/davidmosiah/tiktok-agent-publisher
 NPM: https://www.npmjs.com/package/tiktok-agent-publisher
+Docs: https://github.com/davidmosiah/tiktok-agent-publisher#readme
 Primary command: npm exec --yes --package=tiktok-agent-publisher -- tiktok-agent-publisher doctor
 MCP command: tiktok-agent-mcp
 
 Core tools:
-- tiktok_agent_manifest
-- tiktok_connection_status
-- tiktok_privacy_audit
-- tiktok_publish_video
-- tiktok_publish_status
-- tiktok_list_videos
+- tiktok_agent_manifest — runtime contract, supported clients, tool list
+- tiktok_connection_status — credentials present, app status, dry-run mode
+- tiktok_capabilities — supported video formats, post types, max duration
+- tiktok_privacy_audit — what is logged locally vs sent to TikTok
+- tiktok_publish_video — publish a video with caption, hashtags, privacy
+- tiktok_publish_status — poll the publish job and report success or rejection
+- tiktok_list_videos — list recent uploads for confirmation
+- tiktok_oauth_authorize_url — generates the TikTok consent URL
+
+OAuth env vars (from TikTok Developer Portal, Content Posting API):
+- TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET
+- TIKTOK_REDIRECT_URI — must match the URI registered for your app
+- TIKTOK_TOKEN_PATH — defaults to ~/.tiktok-agent-publisher/tokens.json
+- TIKTOK_DRY_RUN=true — default; set to false to publish for real
+- TIKTOK_DEFAULT_PRIVACY — default "self_only"; "mutual_follow_friends" or "public" allowed
+
+Workflow for agents:
+1. Call tiktok_connection_status before any upload to verify credentials and app review status.
+2. The Content Posting API requires app review approval — surface that requirement to the user if not granted.
+3. Always preview caption + hashtags + privacy with the user before publish.
+4. Use tiktok_publish_status to poll until the publish job resolves (rejected videos are common; relay reasons).
 
 Safety:
-- Dry-run is enabled by default.
-- Tokens are never returned to agents.
-- Live publishing requires TIKTOK_DRY_RUN=false.
+- OAuth tokens stored locally, never returned in tool output.
+- Dry-run on by default; live publishing requires TIKTOK_DRY_RUN=false.
+- Caption length, hashtag count, and copyrighted-audio guards enforced client-side.
+- Not affiliated with or endorsed by TikTok / ByteDance.
