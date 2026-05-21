@@ -61,7 +61,8 @@
     "url": "git+https://github.com/davidmosiah/tiktok-agent-publisher.git"
   },
   "bugs": {
-    "url": "https://github.com/davidmosiah/tiktok-agent-publisher/issues"
+    "url": "https://github.com/davidmosiah/tiktok-agent-publisher/issues",
+    "email": "support@delx.ai"
   },
   "homepage": "https://github.com/davidmosiah/tiktok-agent-publisher"
 }
