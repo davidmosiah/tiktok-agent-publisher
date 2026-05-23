@@ -1,6 +1,6 @@
 {
   "name": "tiktok-agent-publisher",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "mcpName": "io.github.davidmosiah/tiktok-agent-publisher",
   "description": "Agent-first TikTok Content Posting API CLI and MCP server with dry-run publishing, OAuth readiness and privacy audit tools.",
   "type": "module",
