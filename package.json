@@ -1,6 +1,6 @@
 {
   "name": "tiktok-agent-publisher",
-  "version": "0.1.4",
+  "version": "0.1.3",
   "mcpName": "io.github.davidmosiah/tiktok-agent-publisher",
   "description": "Agent-first TikTok Content Posting API CLI and MCP server with dry-run publishing, OAuth readiness and privacy audit tools.",
   "type": "module",
@@ -34,7 +34,7 @@
   "author": "David Mosiah",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.21.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "zod": "^4.4.1"
@@ -64,5 +64,11 @@
     "url": "https://github.com/davidmosiah/tiktok-agent-publisher/issues",
     "email": "support@delx.ai"
   },
-  "homepage": "https://github.com/davidmosiah/tiktok-agent-publisher"
+  "homepage": "https://github.com/davidmosiah/tiktok-agent-publisher",
+  "overrides": {
+    "qs": "6.15.2",
+    "hono": "4.12.22",
+    "fast-uri": "3.1.2",
+    "ip-address": "10.2.0"
+  }
 }
