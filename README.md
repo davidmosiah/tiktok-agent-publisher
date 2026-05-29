@@ -58,6 +58,109 @@ Or run without installing:
 npm exec --yes --package=tiktok-agent-publisher -- tiktok-agent-publisher doctor
 ```
 
+## First Post (Dry-Run) Walkthrough
+
+No TikTok credentials are required to try this. With no `.env`, dry-run is on by
+default, so every command below returns structured JSON without touching the live
+API. This is the exact sequence an agent should follow before its first real post.
+The outputs are real CLI runs, lightly trimmed.
+
+**1. Check readiness.** `doctor` reports mode and what is still missing — never any
+token values.
+
+```bash
+$ tiktok-agent-publisher doctor
+{
+  "ok": true,
+  "dry_run": true,
+  "configured": {
+    "client_key": false,
+    "client_secret": false,
+    "access_token": false,
+    "refresh_token": false,
+    "public_media_base_url": false,
+    "supabase_storage": false
+  },
+  "missing": [
+    "TIKTOK_CLIENT_KEY",
+    "TIKTOK_CLIENT_SECRET",
+    "TIKTOK_ACCESS_TOKEN",
+    "TIKTOK_REFRESH_TOKEN"
+  ],
+  "ready_for_live_publish": false,
+  "ready_for_direct_video_upload": false,
+  "next_steps": [
+    "Current mode is dry-run. Use dry-run to validate agent workflow before live posting."
+  ]
+}
+```
+
+**2. Confirm the privacy boundaries.** `privacy-audit` states what stays local and
+what is sent to TikTok, so the agent can reason about the contract before any write.
+
+```bash
+$ tiktok-agent-publisher privacy-audit
+{
+  "project": "tiktok-agent-publisher",
+  "secrets_returned_to_agent": false,
+  "token_storage": "Environment variables or local .env with user-only file permissions; tokens are never returned by tools.",
+  "safety_rules": [
+    "Dry-run is the default.",
+    "Only post content the user owns or has permission to publish.",
+    "Use explicit confirmation before live direct posting."
+  ]
+}
+```
+
+**3. Build the publish payload (dry-run).** This validates the job shape and caption
+without uploading anything. `result.platformPostId` is a synthetic `dryrun_*` id and
+`raw.dryRun` is `true`, so you can wire up retries and audit logging safely.
+
+```bash
+$ tiktok-agent-publisher publish-video \
+    --video ./short.mp4 \
+    --caption "First agent post — testing the dry-run flow" \
+    --title "Hello from an agent"
+{
+  "ok": true,
+  "dry_run": true,
+  "job": {
+    "id": "tiktok_1780082349025",
+    "platform": "tiktok",
+    "status": "queued",
+    "caption": "First agent post — testing the dry-run flow",
+    "mediaPaths": ["./short.mp4"],
+    "metadata": { "title": "Hello from an agent" }
+  },
+  "result": {
+    "provider": "tiktok_official",
+    "platformPostId": "dryrun_1780082349025",
+    "raw": { "dryRun": true, "jobId": "tiktok_1780082349025" }
+  }
+}
+```
+
+**4. Poll status (dry-run).** `publish-status` returns a `DRY_RUN` status so the
+polling loop can be exercised end to end.
+
+```bash
+$ tiktok-agent-publisher publish-status --publish-id dryrun_1780082349025
+{ "dryRun": true, "publishId": "dryrun_1780082349025", "status": "DRY_RUN" }
+```
+
+**5. List recent videos (dry-run).** Returns an empty, well-formed list — the same
+shape the live API returns, so post-publish confirmation code works unchanged.
+
+```bash
+$ tiktok-agent-publisher list-videos --max-count 5
+{ "dryRun": true, "videos": [], "cursor": null, "has_more": false }
+```
+
+**Going live.** Fill in `TIKTOK_CLIENT_KEY` / `TIKTOK_CLIENT_SECRET` (and complete
+OAuth — see [`auth-url`](#cli)), confirm `doctor` reports `ready_for_live_publish: true`,
+then set `TIKTOK_DRY_RUN=false`. The same five commands then operate against the real
+Content Posting API.
+
 ## CLI
 
 ```bash
