@@ -3,7 +3,7 @@
   "name": "io.github.davidmosiah/tiktok-agent-publisher",
   "version": "0.1.4",
   "title": "TikTok Agent Publisher",
-  "description": "Local-first TikTok Content Posting API tooling for AI agents. Supports OAuth readiness checks, dry-run publishing flows and explicit live uploads.",
+  "description": "Local-first TikTok Content Posting API for AI agents: OAuth checks, dry-run and live uploads.",
   "websiteUrl": "https://github.com/davidmosiah/tiktok-agent-publisher",
   "repository": {
     "url": "https://github.com/davidmosiah/tiktok-agent-publisher",
