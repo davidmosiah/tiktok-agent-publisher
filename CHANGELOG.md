@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.7
+
+- Security: fleet pin hygiene — `hono@4.13.1`, `@hono/node-server@2.1.0`, `fast-uri@3.1.5`, `ip-address@10.4.0` (stale security overrides were still vulnerable).
+
+
 ## 0.1.5 - 2026-05-29
 - Docs: add a "First Post (Dry-Run) Walkthrough" to the README — a five-step, credential-free sequence (`doctor` → `privacy-audit` → `publish-video` → `publish-status` → `list-videos`) with real, captured CLI output, plus a "going live" note. No code changes.
 
