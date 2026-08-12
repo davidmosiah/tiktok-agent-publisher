@@ -188,7 +188,7 @@ tiktok-agent-mcp
 Default is **stdio**. Optional Streamable HTTP — no session id, JSON responses, loopback only:
 
 ```bash
-npx -y tiktok-agent-publisher --http
+npx -y -p tiktok-agent-publisher tiktok-agent-mcp --http
 # GET  http://127.0.0.1:3031/health
 # POST http://127.0.0.1:3031/mcp   (sessionless)
 ```
