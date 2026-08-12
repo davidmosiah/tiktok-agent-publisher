@@ -183,11 +183,17 @@ Stdio:
 tiktok-agent-mcp
 ```
 
-HTTP:
+## HTTP (v2 stateless)
+
+Default is **stdio**. Optional Streamable HTTP — no session id, JSON responses, loopback only:
 
 ```bash
-TIKTOK_MCP_TRANSPORT=http tiktok-agent-mcp
+npx -y tiktok-agent-publisher --http
+# GET  http://127.0.0.1:3031/health
+# POST http://127.0.0.1:3031/mcp   (sessionless)
 ```
+
+Env: `TIKTOK_MCP_HOST`, `TIKTOK_MCP_PORT`, `TIKTOK_MCP_TRANSPORT=http`.
 
 Hermes-style config:
 
