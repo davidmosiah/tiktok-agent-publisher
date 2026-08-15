@@ -5,3 +5,5 @@ coverage/
 npm-debug.log*
 .DS_Store
 *.local
+tokens.json
+config.json
