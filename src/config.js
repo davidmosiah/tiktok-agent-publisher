@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { writePrivateOAuthFile } from './tools/private-oauth-file.mjs';
 import path from 'node:path';
 import process from 'node:process';
 
@@ -67,6 +68,14 @@ export function getConfig({ cwd = process.cwd(), env = process.env } = {}) {
 }
 
 export function persistEnvValues(envPath, values) {
+  for (const [key, value] of Object.entries(values)) {
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(key) ||
+        (value !== undefined && value !== null && !['string', 'number', 'boolean'].includes(typeof value)) ||
+        /[\r\n]/.test(String(value ?? '')) ||
+        (typeof value === 'number' && !Number.isFinite(value))) {
+      throw new Error('Unsupported environment value format');
+    }
+  }
   const current = fs.existsSync(envPath) ? fs.readFileSync(envPath, 'utf8').split(/\r?\n/) : [];
   const keys = new Set(Object.keys(values));
   const seen = new Set();
@@ -81,5 +90,5 @@ export function persistEnvValues(envPath, values) {
   for (const key of keys) {
     if (!seen.has(key)) next.push(`${key}=${values[key] ?? ''}`);
   }
-  fs.writeFileSync(envPath, `${next.filter((line) => line !== '').join('\n')}\n`, { mode: 0o600 });
+  writePrivateOAuthFile(envPath, `${next.filter((line) => line !== '').join('\n')}\n`);
 }
