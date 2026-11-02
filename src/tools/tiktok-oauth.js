@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
+import { writePrivateOAuthFile, parseOAuthTokenResponse } from './private-oauth-file.mjs';
 import http from 'node:http';
 import { exec } from 'node:child_process';
 import path from 'node:path';
@@ -60,18 +61,7 @@ async function exchangeCode(code, codeVerifier) {
     body
   });
   const text = await res.text();
-  let json;
-  try {
-    json = JSON.parse(text);
-  } catch {
-    throw new Error(`Token response is not JSON: ${text.slice(0, 500)}`);
-  }
-
-  if (!res.ok || !json.access_token) {
-    throw new Error(`Token exchange failed: ${JSON.stringify(json, null, 2)}`);
-  }
-
-  return json;
+  return parseOAuthTokenResponse(text, res.ok);
 }
 
 function persistTokens(json) {
@@ -100,7 +90,7 @@ function persistTokens(json) {
   if (!hasRefresh) next.push(`TIKTOK_REFRESH_TOKEN=${json.refresh_token || ''}`);
   if (!hasExpires) next.push(`TIKTOK_ACCESS_TOKEN_EXPIRES_IN=${json.expires_in || ''}`);
 
-  fs.writeFileSync(envPath, next.filter(Boolean).join('\n') + '\n', 'utf8');
+  writePrivateOAuthFile(envPath, next.filter(Boolean).join('\n') + '\n');
 }
 
 function maybeOpenBrowser(url) {
@@ -147,11 +137,7 @@ if (cmd === 'exchange-code') {
     const json = await exchangeCode(code, codeVerifier);
     persistTokens(json);
     console.log('Access token saved to .env');
-    console.log(JSON.stringify({
-      scope: json.scope,
-      expires_in: json.expires_in,
-      open_id: json.open_id
-    }, null, 2));
+    // Provider response metadata is intentionally not printed.
     process.exit(0);
   } catch (error) {
     console.error(String(error));
@@ -224,11 +210,7 @@ if (cmd === 'start-auth') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       res.end('TikTok auth complete. You can close this tab.');
       console.log('Access token saved to .env');
-      console.log(JSON.stringify({
-        scope: json.scope,
-        expires_in: json.expires_in,
-        open_id: json.open_id
-      }, null, 2));
+      // Provider response metadata is intentionally not printed.
     } catch (exchangeError) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       res.end('Token exchange failed. Check terminal output.');
@@ -256,3 +238,4 @@ console.error('  node src/tools/tiktok-oauth.js auth-url [--redirect <URI>] [--s
 console.error('  node src/tools/tiktok-oauth.js exchange-code --code <CODE> [--redirect <URI>] [--code-verifier <PKCE_VERIFIER>]');
 console.error('  node src/tools/tiktok-oauth.js start-auth [--redirect <URI>] [--scopes ...] [--state ...]');
 process.exit(1);
+
